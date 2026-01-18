@@ -1,16 +1,19 @@
 name: Deploy to GitHub Pages
+
 on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -19,11 +22,11 @@ jobs:
 
       - name: Install dependencies (optional)
         run: |
-          if [ -f package.json ]; then npm ci || true; fi
+          if [ -f package.json ]; then npm ci; fi
 
       - name: Build (optional)
         run: |
-          if npm run | grep -q "build"; then npm run build || true; fi
+          if npm run dev | grep -q "build"; then npm run build; fi
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
