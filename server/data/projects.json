@@ -1,53 +1,59 @@
 [
     {
         "id": 1,
-        "title": "Quantum Dashboard",
-        "description": "A futuristic dashboard with real-time data visualization using WebSockets.",
+        "title": "Vertex Launcher",
+        "description": "Custom Minecraft launcher featuring offline authentication, mod management, and automatic updates.",
         "tags": [
-            "React",
-            "Node.js",
-            "WebSockets",
-            "D3.js"
+            "Electron",
+            "TypeScript",
+            "React"
         ],
         "links": {
-            "github": "https://github.com/facebook/react",
-            "demo": "https://react.dev"
+            "github": "#",
+            "demo": ""
         },
-        "repo": "facebook/react",
-        "category": "Frontend"
+        "screenshots": [
+            "https://placehold.co/600x400/1f1f2e/7aa2f7?text=Launcher+Home",
+            "https://placehold.co/600x400/1f1f2e/bb9af7?text=Mod+Manager"
+        ],
+        "repo": "Vertex-LabX/VertexLauncher",
+        "category": "Desktop"
     },
     {
         "id": 2,
-        "title": "Nebula API",
-        "description": "Scalable RESTful API for handling interstellar communications.",
+        "title": "CloudNetwork Core",
+        "description": "The backbone of the server, managing economy, player stats, and custom game mechanics via Spigot API.",
         "tags": [
-            "Node.js",
-            "Express",
-            "MongoDB",
-            "Docker"
+            "Java",
+            "MySQL",
+            "Spigot API"
         ],
         "links": {
-            "github": "https://github.com/expressjs/express",
-            "demo": "https://expressjs.com"
+            "github": "",
+            "demo": ""
         },
-        "repo": "expressjs/express",
+        "repo": "",
         "category": "Backend"
     },
     {
         "id": 3,
-        "title": "Cyber Sentinel",
-        "description": "AI-powered security bot for Discord servers.",
+        "title": "Vertex Visuals",
+        "description": "Advanced client-side mod providing custom block overlays, chroma effects, and visual enhancements.",
         "tags": [
-            "Python",
-            "Discord.py",
-            "TensorFlow"
+            "Java",
+            "Mixin",
+            "OpenGL"
         ],
         "links": {
-            "github": "https://github.com/Rapptz/discord.py",
-            "demo": "#"
+            "github": "",
+            "demo": ""
         },
-        "repo": "Rapptz/discord.py",
-        "category": "AI"
+        "screenshots": [
+            "https://placehold.co/600x400/1f1f2e/7aa2f7?text=Block+Overlay",
+            "https://placehold.co/600x400/1f1f2e/bb9af7?text=Chroma+Settings"
+        ],
+        "repo": "",
+        "category": "Mods"
     },
     {
         "id": 5,

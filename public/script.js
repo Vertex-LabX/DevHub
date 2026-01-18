@@ -59,7 +59,15 @@ const iconMap = {
     'JavaScript': 'devicon-javascript-plain colored',
     'Express': 'devicon-express-original',
     'HTML': 'devicon-html5-plain colored',
-    'CSS': 'devicon-css3-plain colored'
+    'CSS': 'devicon-css3-plain colored',
+    'Java': 'devicon-java-plain colored',
+    'MySQL': 'devicon-mysql-plain colored',
+    'Spigot API': 'devicon-java-plain', // Fallback
+    'Electron': 'devicon-electron-original colored',
+    'TypeScript': 'devicon-typescript-plain colored',
+    'SQLite': 'devicon-sqlite-plain colored',
+    'OpenGL': 'devicon-opengl-plain',
+    'Mixin': 'devicon-java-plain' // Fallback
 };
 
 async function init() {
@@ -82,6 +90,31 @@ async function init() {
         langEnBtn.addEventListener('click', () => setLanguage('en'));
         langRuBtn.addEventListener('click', () => setLanguage('ru'));
     }
+
+    initTypingEffect();
+}
+
+function initTypingEffect() {
+    const title = document.querySelector('.welcome-text h1');
+    if (!title) return;
+
+    // Store original text or use current
+    const text = title.textContent;
+    title.textContent = '> ';
+    title.classList.add('typing-cursor');
+
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            title.textContent += text.charAt(i);
+            i++;
+            setTimeout(type, 100); // Typing speed
+        }
+    }
+
+    // Start after small delay
+    setTimeout(type, 500);
 }
 
 function setLanguage(lang) {
@@ -246,11 +279,18 @@ function renderProjects(projects) {
             <div class="card-links">
                 ${project.links.github ? `<a href="${project.links.github}" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> ${translations[currentLang].github}</a>` : ''}
                 ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> ${translations[currentLang].demo}</a>` : ''}
+                ${project.screenshots ? `<button class="btn btn-primary" onclick="openModalById(${project.id})"><i class="fa-solid fa-images"></i> Screenshots</button>` : ''}
+                ${!project.links.github && !project.links.demo && !project.screenshots ? `<span class="btn btn-disabled"><i class="fa-solid fa-lock"></i> Private Project</span>` : ''}
             </div>
         `;
 
         projectsContainer.appendChild(card);
     });
+}
+
+function openModalById(id) {
+    const project = allProjects.find(p => p.id === id);
+    if (project) openModal(project);
 }
 
 function openModal(project) {
@@ -265,6 +305,17 @@ function openModal(project) {
         ${project.links.github ? `<a href="${project.links.github}" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-github"></i> ${translations[currentLang].github}</a>` : ''}
         ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> ${translations[currentLang].demo}</a>` : ''}
     `;
+
+    // Add screenshots section
+    const oldGallery = document.querySelector('.modal-gallery');
+    if (oldGallery) oldGallery.remove();
+
+    if (project.screenshots && project.screenshots.length > 0) {
+        const gallery = document.createElement('div');
+        gallery.className = 'modal-gallery';
+        gallery.innerHTML = project.screenshots.map(src => `<img src="${src}" alt="Screenshot" class="screenshot">`).join('');
+        document.querySelector('.modal-content').insertBefore(gallery, linksContainer);
+    }
 
     const statsSource = document.getElementById(`stats-${project.id}`);
     const statsDest = document.getElementById('modal-stats');

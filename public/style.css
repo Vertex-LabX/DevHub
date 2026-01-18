@@ -179,6 +179,26 @@ body {
     color: var(--text-secondary);
 }
 
+.typing-cursor::after {
+    content: '_';
+    display: inline-block;
+    margin-left: 5px;
+    color: var(--accent);
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
 .search-bar {
     background-color: var(--card-bg);
     border: 1px solid var(--border);
@@ -302,6 +322,14 @@ body {
 .btn-secondary {
     background-color: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
+}
+
+.btn-disabled {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--text-secondary);
+    cursor: not-allowed;
+    opacity: 0.6;
+    border: 1px dashed var(--border);
 }
 
 .loading {
@@ -457,47 +485,87 @@ body {
     }
 }
 
+/* Credits Page Styles - Glassmorphism Redesign */
 .credits-container {
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle at top, #16161e 0%, #0d0d12 100%);
+    background: radial-gradient(circle at 50% 10%, #1a1a2e 0%, #0d0d12 100%);
     position: relative;
     overflow: hidden;
+}
+
+/* Background animated blobs */
+.credits-container::before,
+.credits-container::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+    z-index: 0;
+    animation: blobFloat 10s infinite alternate;
+}
+
+.credits-container::before {
+    background: #7aa2f7;
+    top: -10%;
+    left: -10%;
+}
+
+.credits-container::after {
+    background: #bb9af7;
+    bottom: -10%;
+    right: -10%;
+    animation-delay: -5s;
 }
 
 .back-link {
     position: absolute;
     top: 2rem;
     left: 2rem;
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-size: 1.1rem;
-    transition: color 0.2s;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px 20px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+    z-index: 10;
 }
 
 .back-link:hover {
-    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+    transform: translateX(-5px);
 }
 
 .credits-title {
-    font-size: 3rem;
+    font-size: 4rem;
     margin-bottom: 4rem;
-    background: linear-gradient(to right, #fff, #999);
+    background: linear-gradient(to right, #fff, #a0a0b0);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 700;
-    letter-spacing: -1px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    z-index: 10;
+    text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .creators-grid {
     display: flex;
-    gap: 4rem;
+    gap: 3rem;
     flex-wrap: wrap;
     justify-content: center;
+    z-index: 10;
+    perspective: 1000px;
 }
 
 .creator-card {
@@ -505,8 +573,24 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    padding: 2rem;
+    width: 300px;
+
+    /* Removed Card Styling for cleaner look */
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    backdrop-filter: none;
+
+    transition: all 0.4s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
+}
+
+.creator-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    /* Subtle glow on hover instead of card effect */
+    text-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
 }
 
 .creator-card:nth-child(2) {
@@ -515,8 +599,31 @@ body {
 
 .avatar-wrapper {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    /* Increased from 140px */
+    height: 200px;
+    border-radius: 50%;
+    padding: 5px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    animation: avatarFloat 6s ease-in-out infinite;
+}
+
+/* Offset animation for second avatar */
+.creator-card:nth-child(2) .avatar-wrapper {
+    animation-delay: -3s;
+}
+
+@keyframes avatarFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
 
 .avatar {
@@ -526,7 +633,7 @@ body {
     object-fit: cover;
     z-index: 2;
     position: relative;
-    border: 3px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid rgba(255, 255, 255, 0.8);
 }
 
 .glow {
@@ -534,13 +641,19 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 120%;
-    height: 120%;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
-    filter: blur(20px);
+    filter: blur(25px);
+    /* Increased blur */
     z-index: 1;
     opacity: 0.6;
-    animation: pulseGlow 3s infinite alternate;
+    transition: opacity 0.3s;
+}
+
+.creator-card:hover .glow {
+    opacity: 1;
+    filter: blur(35px);
 }
 
 .start-glow {
@@ -552,42 +665,61 @@ body {
 }
 
 .creator-card h2 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
+    /* Increased size */
+    font-weight: 800;
+    color: #fff;
+    margin: 0;
+    margin-top: 1rem;
+    letter-spacing: -1px;
+}
+
+.creator-card h3 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: -0.5rem;
     font-weight: 600;
+    opacity: 0.8;
+}
+
+.social-links {
+    margin-top: 1rem;
 }
 
 .social-links a {
-    color: var(--text-secondary);
-    font-size: 1.5rem;
-    transition: all 0.2s;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 2rem;
+    transition: all 0.3s;
+    display: inline-block;
 }
 
 .social-links a:hover {
-    color: var(--text-primary);
-    transform: translateY(-3px);
+    color: #fff;
+    transform: scale(1.2) rotate(10deg);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+}
+
+@keyframes blobFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
 }
 
 @keyframes fadeInUp {
     from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px);
     }
 
     to {
         opacity: 1;
         transform: translateY(0);
-    }
-}
-
-@keyframes pulseGlow {
-    from {
-        opacity: 0.5;
-        transform: translate(-50%, -50%) scale(0.9);
-    }
-
-    to {
-        opacity: 0.8;
-        transform: translate(-50%, -50%) scale(1.1);
     }
 }
 
@@ -619,4 +751,33 @@ body {
     background: var(--accent);
     color: #fff;
     transform: translateY(-2px);
+}
+
+.modal-gallery {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    padding-bottom: 0.5rem;
+}
+
+.screenshot {
+    height: 200px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    transition: transform 0.2s;
+}
+
+.screenshot:hover {
+    transform: scale(1.05);
+}
+
+/* Scrollbar for gallery */
+.modal-gallery::-webkit-scrollbar {
+    height: 6px;
+}
+
+.modal-gallery::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
 }
