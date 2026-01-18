@@ -1,5 +1,4 @@
-const API_PROJECTS = '/api/projects';
-const API_CATEGORIES = '/api/categories';
+const PROJECTS_DATA_URL = 'data/projects.json';
 
 const projectsContainer = document.getElementById('projects-container');
 const categoryList = document.getElementById('category-list');
@@ -62,17 +61,16 @@ const iconMap = {
     'CSS': 'devicon-css3-plain colored',
     'Java': 'devicon-java-plain colored',
     'MySQL': 'devicon-mysql-plain colored',
-    'Spigot API': 'devicon-java-plain', // Fallback
+    'Spigot API': 'devicon-java-plain',
     'Electron': 'devicon-electron-original colored',
     'TypeScript': 'devicon-typescript-plain colored',
     'SQLite': 'devicon-sqlite-plain colored',
     'OpenGL': 'devicon-opengl-plain',
-    'Mixin': 'devicon-java-plain' // Fallback
+    'Mixin': 'devicon-java-plain'
 };
 
 async function init() {
-    await fetchCategories();
-    await fetchProjects();
+    await loadData();
 
     searchInput.addEventListener('input', handleSearch);
 
@@ -98,7 +96,6 @@ function initTypingEffect() {
     const title = document.querySelector('.welcome-text h1');
     if (!title) return;
 
-    // Store original text or use current
     const text = title.textContent;
     title.textContent = '> ';
     title.classList.add('typing-cursor');
@@ -109,11 +106,10 @@ function initTypingEffect() {
         if (i < text.length) {
             title.textContent += text.charAt(i);
             i++;
-            setTimeout(type, 100); // Typing speed
+            setTimeout(type, 100);
         }
     }
 
-    // Start after small delay
     setTimeout(type, 500);
 }
 
@@ -139,25 +135,18 @@ function setLanguage(lang) {
         allProjectsLi.textContent = translations[lang].all_projects;
     }
 
-    renderProjects(currentLang === 'en' ? allProjects : allProjects);
+    renderProjects(allProjects);
 }
 
-async function fetchCategories() {
-    try {
-        const response = await fetch(API_CATEGORIES);
-        const categories = await response.json();
-        renderCategories(categories);
-    } catch (error) {
-        console.error('Error fetching categories:', error);
-    }
-}
-
-async function fetchProjects(category = 'All') {
+async function loadData() {
     projectsContainer.innerHTML = `<div class="loading">${translations[currentLang].loading}</div>`;
     try {
-        const url = category === 'All' ? API_PROJECTS : `${API_PROJECTS}?category=${encodeURIComponent(category)}`;
-        const response = await fetch(url);
+        const response = await fetch(PROJECTS_DATA_URL);
         allProjects = await response.json();
+
+        const categories = new Set(allProjects.map(p => p.category));
+        const sortedCategories = ['All', ...Array.from(categories).sort()];
+        renderCategories(sortedCategories);
 
         renderProjects(allProjects);
         updateTagCloud(allProjects);
@@ -165,7 +154,7 @@ async function fetchProjects(category = 'All') {
         allProjects.forEach(fetchGitHubStats);
     } catch (error) {
         projectsContainer.innerHTML = `<div class="loading">Error loading projects: ${error.message}</div>`;
-        console.error('Error fetching projects:', error);
+        console.error('Error fetching data:', error);
     }
 }
 
@@ -199,14 +188,19 @@ function renderCategories(categories) {
         li.addEventListener('click', () => {
             document.querySelectorAll('.categories-nav li').forEach(el => el.classList.remove('active'));
             li.classList.add('active');
-
             document.querySelectorAll('.tag-cloud-item').forEach(el => el.classList.remove('active'));
 
-            fetchProjects(cat);
+            filterByCategory(cat);
         });
 
         categoryList.appendChild(li);
     });
+}
+
+function filterByCategory(category) {
+    const filtered = category === 'All' ? allProjects : allProjects.filter(p => p.category === category);
+    renderProjects(filtered);
+    updateTagCloud(filtered);
 }
 
 function updateTagCloud(projects) {
@@ -250,7 +244,7 @@ function renderProjects(projects) {
         const card = document.createElement('div');
         card.className = 'project-card';
         card.onclick = (e) => {
-            if (e.target.closest('a')) return;
+            if (e.target.closest('a') || e.target.closest('button')) return;
             openModal(project);
         };
         card.style.cursor = 'pointer';
@@ -306,7 +300,6 @@ function openModal(project) {
         ${project.links.demo ? `<a href="${project.links.demo}" target="_blank" class="btn btn-primary"><i class="fa-solid fa-rocket"></i> ${translations[currentLang].demo}</a>` : ''}
     `;
 
-    // Add screenshots section
     const oldGallery = document.querySelector('.modal-gallery');
     if (oldGallery) oldGallery.remove();
 

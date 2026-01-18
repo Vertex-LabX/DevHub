@@ -485,7 +485,6 @@ body {
     }
 }
 
-/* Credits Page Styles - Glassmorphism Redesign */
 .credits-container {
     height: 100vh;
     display: flex;
@@ -497,7 +496,6 @@ body {
     overflow: hidden;
 }
 
-/* Background animated blobs */
 .credits-container::before,
 .credits-container::after {
     content: '';
@@ -575,13 +573,10 @@ body {
     gap: 1.5rem;
     padding: 2rem;
     width: 300px;
-
-    /* Removed Card Styling for cleaner look */
     background: transparent;
     border: none;
     box-shadow: none;
     backdrop-filter: none;
-
     transition: all 0.4s ease;
     opacity: 0;
     animation: fadeInUp 0.8s ease forwards;
@@ -589,7 +584,6 @@ body {
 
 .creator-card:hover {
     transform: translateY(-10px) scale(1.05);
-    /* Subtle glow on hover instead of card effect */
     text-shadow: 0 0 20px rgba(122, 162, 247, 0.3);
 }
 
@@ -600,7 +594,6 @@ body {
 .avatar-wrapper {
     position: relative;
     width: 200px;
-    /* Increased from 140px */
     height: 200px;
     border-radius: 50%;
     padding: 5px;
@@ -609,7 +602,6 @@ body {
     animation: avatarFloat 6s ease-in-out infinite;
 }
 
-/* Offset animation for second avatar */
 .creator-card:nth-child(2) .avatar-wrapper {
     animation-delay: -3s;
 }
@@ -645,7 +637,6 @@ body {
     height: 100%;
     border-radius: 50%;
     filter: blur(25px);
-    /* Increased blur */
     z-index: 1;
     opacity: 0.6;
     transition: opacity 0.3s;
@@ -666,7 +657,6 @@ body {
 
 .creator-card h2 {
     font-size: 2.5rem;
-    /* Increased size */
     font-weight: 800;
     color: #fff;
     margin: 0;
@@ -772,7 +762,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Scrollbar for gallery */
 .modal-gallery::-webkit-scrollbar {
     height: 6px;
 }
