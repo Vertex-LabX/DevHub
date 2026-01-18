@@ -1,0 +1,73 @@
+[
+    {
+        "id": 1,
+        "title": "Vertex Launcher",
+        "description": "Custom Minecraft launcher featuring offline authentication, mod management, and automatic updates.",
+        "tags": [
+            "Electron",
+            "TypeScript",
+            "React"
+        ],
+        "links": {
+            "github": "#",
+            "demo": ""
+        },
+        "screenshots": [
+            "https://placehold.co/600x400/1f1f2e/7aa2f7?text=Launcher+Home",
+            "https://placehold.co/600x400/1f1f2e/bb9af7?text=Mod+Manager"
+        ],
+        "repo": "Vertex-LabX/VertexLauncher",
+        "category": "Desktop"
+    },
+    {
+        "id": 2,
+        "title": "CloudNetwork Core",
+        "description": "The backbone of the server, managing economy, player stats, and custom game mechanics via Spigot API.",
+        "tags": [
+            "Java",
+            "MySQL",
+            "Spigot API"
+        ],
+        "links": {
+            "github": "",
+            "demo": ""
+        },
+        "repo": "",
+        "category": "Backend"
+    },
+    {
+        "id": 3,
+        "title": "Vertex Visuals",
+        "description": "Advanced client-side mod providing custom block overlays, chroma effects, and visual enhancements.",
+        "tags": [
+            "Java",
+            "Mixin",
+            "OpenGL"
+        ],
+        "links": {
+            "github": "",
+            "demo": ""
+        },
+        "screenshots": [
+            "https://placehold.co/600x400/1f1f2e/7aa2f7?text=Block+Overlay",
+            "https://placehold.co/600x400/1f1f2e/bb9af7?text=Chroma+Settings"
+        ],
+        "repo": "",
+        "category": "Mods"
+    },
+    {
+        "id": 5,
+        "title": "Lights Out",
+        "description": "Classic electronic puzzle game. Toggle lights to clear the grid!",
+        "tags": [
+            "JavaScript",
+            "HTML",
+            "CSS"
+        ],
+        "links": {
+            "demo": "/games/lights-out/"
+        },
+        "repo": "",
+        "category": "Games"
+    }
+]
