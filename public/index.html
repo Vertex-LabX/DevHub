@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevHub | Project Catalog</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-code-branch"></i> DevHub
+            </div>
+            <nav class="categories-nav">
+                <h3 data-i18n="categories">Categories</h3>
+                <ul id="category-list">
+                    <!-- Categories will be injected here -->
+                    <li class="active" data-category="All" data-i18n="all_projects">All Projects</li>
+                </ul>
+
+                <h3 style="margin-top: 2rem; padding-left: 1rem;" data-i18n="popular_tags">Popular Tags</h3>
+                <div id="tag-cloud" class="tag-cloud">
+                    <!-- Tags will be injected here -->
+                </div>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="lang-switcher">
+                    <span id="lang-en" class="lang-btn active">EN</span>
+                    <span class="lang-divider">|</span>
+                    <span id="lang-ru" class="lang-btn">RU</span>
+                </div>
+                <a href="credits.html" class="credits-link"><i class="fa-solid fa-heart"></i> <span
+                        data-i18n="credits">Credits</span></a>
+                <p>&copy; 2026 DevHub</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="welcome-text">
+                    <h1 data-i18n="explore_title">Explore Projects</h1>
+                    <p data-i18n="explore_desc">Discover the latest tools, libraries, and experiments.</p>
+                </div>
+                <div class="search-bar">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" id="search-input" placeholder="Search projects...">
+                </div>
+            </header>
+
+            <section class="projects-grid" id="projects-container">
+                <!-- Projects will be injected here -->
+                <div class="loading">Loading projects...</div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <h2 id="modal-title">Project Title</h2>
+                <div id="modal-links" class="modal-links"></div>
+            </div>
+            <div class="modal-body">
+                <p id="modal-desc">Description</p>
+                <div class="modal-meta">
+                    <div class="modal-tags" id="modal-tags"></div>
+                    <div class="modal-stats" id="modal-stats"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js?v=2"></script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+[
+    {
+        "id": 1,
+        "title": "Quantum Dashboard",
+        "description": "A futuristic dashboard with real-time data visualization using WebSockets.",
+        "tags": [
+            "React",
+            "Node.js",
+            "WebSockets",
+            "D3.js"
+        ],
+        "links": {
+            "github": "https://github.com/facebook/react",
+            "demo": "https://react.dev"
+        },
+        "repo": "facebook/react",
+        "category": "Frontend"
+    },
+    {
+        "id": 2,
+        "title": "Nebula API",
+        "description": "Scalable RESTful API for handling interstellar communications.",
+        "tags": [
+            "Node.js",
+            "Express",
+            "MongoDB",
+            "Docker"
+        ],
+        "links": {
+            "github": "https://github.com/expressjs/express",
+            "demo": "https://expressjs.com"
+        },
+        "repo": "expressjs/express",
+        "category": "Backend"
+    },
+    {
+        "id": 3,
+        "title": "Cyber Sentinel",
+        "description": "AI-powered security bot for Discord servers.",
+        "tags": [
+            "Python",
+            "Discord.py",
+            "TensorFlow"
+        ],
+        "links": {
+            "github": "https://github.com/Rapptz/discord.py",
+            "demo": "#"
+        },
+        "repo": "Rapptz/discord.py",
+        "category": "AI"
+    },
+    {
+        "id": 5,
+        "title": "Lights Out",
+        "description": "Classic electronic puzzle game. Toggle lights to clear the grid!",
+        "tags": [
+            "JavaScript",
+            "HTML",
+            "CSS"
+        ],
+        "links": {
+            "demo": "/games/lights-out/"
+        },
+        "repo": "",
+        "category": "Games"
+    }
+]
