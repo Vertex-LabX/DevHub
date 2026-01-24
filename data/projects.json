@@ -4,9 +4,8 @@
         "title": "Vertex Launcher",
         "description": "Custom Minecraft launcher featuring offline authentication, mod management, and automatic updates.",
         "tags": [
-            "Electron",
-            "TypeScript",
-            "React"
+            "Kotlin",
+            "Java"
         ],
         "links": {
             "github": "#",
