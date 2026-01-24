@@ -66,7 +66,8 @@ const iconMap = {
     'TypeScript': 'devicon-typescript-plain colored',
     'SQLite': 'devicon-sqlite-plain colored',
     'OpenGL': 'devicon-opengl-plain',
-    'Mixin': 'devicon-java-plain'
+    'Mixin': 'devicon-java-plain',
+    'Kotlin': 'devicon-kotlin-plain colored'
 };
 
 async function init() {
